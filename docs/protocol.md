@@ -86,7 +86,9 @@ sequenceDiagram
 - 관절 속도와 목표물의 참값 포즈는 제공하지 않는다.
 
 **관측 예시.** 왼쪽부터 `head_l`, `wrist_l`, `wrist_r`, `head_l_depth`(가까울수록 밝음,
-무효값 검정), `scan`(top-down, 중앙 삼각형이 전방, 링 간격 1 m)이다.
+무효값 검정), `scan`(top-down, 중앙 삼각형이 전방, 링 간격 1 m)이다. `head_l`·`head_l_depth`·`scan`은
+진열 과제의 에피소드 첫 관측이고, 손목 두 장은 계산대 과제에서 상품을 든 순간이다 — 빈 화면보다
+쓸모가 있어 그 시점을 골랐다.
 
 | `head_l` | `wrist_l` | `wrist_r` | `head_l_depth` | `scan` |
 | --- | --- | --- | --- | --- |
