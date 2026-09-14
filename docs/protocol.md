@@ -14,14 +14,14 @@
 
 평가 서버가 `reset`을 전송하면 `serve_policy()`가 `BasePolicy.reset(msg)`를 호출한 뒤 `ready`를
 응답한다. `observation`마다 `BasePolicy.infer(obs)`가 호출되고 반환값이 `action`으로 전송된다.
-과제 하나는 에피소드 9회이며 아래 흐름이 에피소드마다 반복된다.
+과제 하나는 에피소드 3회이며 아래 흐름이 에피소드마다 반복된다.
 
 ```mermaid
 sequenceDiagram
     participant E as 평가 서버 (WebSocket 클라이언트)
     participant P as 정책 서버 (serve_policy)
     participant U as 참가자 코드 (BasePolicy)
-    Note over E,U: 과제 시작 — 에피소드 N (N = 1..9)
+    Note over E,U: 과제 시작 — 에피소드 N (N = 1..3)
     E->>P: WebSocket 접속 + Authorization: Bearer 토큰
     P-->>E: 101 (토큰 불일치면 401)
     E->>P: reset {episode_id, task_id, instruction, conf, server_info}
@@ -176,9 +176,9 @@ sequenceDiagram
 
 | `task_id` | 과제 | 에피소드 | 틱 상한 | 에피소드 만점 | 잠기는 슬롯 |
 | --- | --- | --- | --- | --- | --- |
-| `ConvStore-Task-A` | 바구니 운반 | 9 | 12,000틱 | 0 | 없음. 22차원 전부 자유 |
-| `ConvStore-Task-B` | 상자에서 진열대로 진열 | 9 | 12,000틱 | 0 | 없음. 22차원 전부 자유 |
-| `ConvStore-Task-C` | 계산대 QR 스캔 | 9 | 12,000틱 | 0 | 14, 18, 19–21 |
+| `ConvStore-Task-A` | 바구니 운반 | 3 | 12,000틱 | 0 | 없음. 22차원 전부 자유 |
+| `ConvStore-Task-B` | 상자에서 진열대로 진열 | 3 | 12,000틱 | 0 | 없음. 22차원 전부 자유 |
+| `ConvStore-Task-C` | 계산대 QR 스캔 | 3 | 12,000틱 | 0 | 14, 18, 19–21 |
 
 세 과제 모두 `action_dim`은 22이고 `control_hz`는 20이며, 12,000틱은 시뮬레이션 10분이다.
 점수는 에피소드 합산이다. 에피소드 만점은 채점 기준 확정 전이라 0으로 두며 확정 시 갱신한다.
